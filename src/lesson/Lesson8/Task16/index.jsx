@@ -55,14 +55,14 @@ const Task16 = () => {
 
   const getStatusClassName = (rightAnswer, currentAnswer, answerId) => {
     if (rightAnswer === currentAnswer && currentAnswer === answerId) {
-      return "correct"
+      return "correct";
     }
 
     if (currentAnswer === answerId) {
-      return "false"
+      return "false";
     }
 
-    return "default"
+    return "default";
   }
 
   return (

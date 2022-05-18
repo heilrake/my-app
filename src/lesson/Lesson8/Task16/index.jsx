@@ -31,6 +31,7 @@ const Task16 = () => {
     },
     {
       name: 'Вопрос 3',
+
       answers: [
         { id: 1, text: 'Ответ31' },
         { id: 2, text: 'Ответ32' },

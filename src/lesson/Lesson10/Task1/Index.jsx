@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
-import TableOfUsers from './TableOfUsers'
+import React from 'react';
+import TableOfUsers from './components/TableOfUsers';
 
 const USERS = [
   {
@@ -41,14 +40,15 @@ const USERS = [
   },
 ]
 
-const Main = () => {
-
+const Lesson2 = () => {
+  const showAllert = () => {
+    alert('!')
+  }
   return (
     <div>
-      <h1>Table of users</h1>
-      <TableOfUsers data={USERS} />
+      <TableOfUsers />
     </div>
   );
 };
 
-export default Main;
+export default Lesson2;

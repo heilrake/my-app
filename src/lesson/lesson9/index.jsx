@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import TableOfUsers from './TableOfUsers'
 
@@ -42,7 +42,6 @@ const USERS = [
 ]
 
 const Main = () => {
-
   return (
     <div>
       <h1>Table of users</h1>

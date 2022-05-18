@@ -1,14 +1,11 @@
 import './App.css';
 
-import Main from './lesson/lesson9/index';
+import CurrentTask from './lesson/Lesson10/Task1/Index';
 
-// import CuurentTask from './lesson/Lesson9/index'
-
-function App() {
-
+const App = () => {
   return (
     <div className="App">
-      <Main />
+      <CurrentTask />
     </div>
   );
 }

@@ -42,7 +42,6 @@ const Task8 = () => {
   const filterColors = () => {
     const result = COLORS.find((color) => color.id === inputValue).color;
 
-    console.log(result)
     return result
   }
 

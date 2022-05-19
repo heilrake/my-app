@@ -15,7 +15,8 @@ const TableOfUsers = ({ users, showMessage }) => (
         <TableRow>
           <TableCell>Name</TableCell>
           <TableCell>Last name</TableCell>
-          <TableCell>age</TableCell>
+          <TableCell>Age</TableCell>
+          <TableCell>Links</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -24,7 +25,7 @@ const TableOfUsers = ({ users, showMessage }) => (
             <TableCell>{item.firstName}</TableCell>
             <TableCell>{item.lastName}</TableCell>
             <TableCell>{item.age}</TableCell>
-            <Link href='#' onClick={showMessage}>Click me!</Link >
+            <TableCell><Link href='#' onClick={showMessage}>Click me!</Link ></TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -16,7 +16,6 @@ const TableOfUsers = ({ users, showMessage }) => (
           <TableCell>Name</TableCell>
           <TableCell>Last name</TableCell>
           <TableCell colspan='2'>Age</TableCell>
-
         </TableRow>
       </TableHead>
       <TableBody>

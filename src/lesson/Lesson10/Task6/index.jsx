@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import ProductList from './component/ProductList.jsx';
 
 import useStyles from './style/style';
@@ -23,8 +24,8 @@ const PRODUCTS = [
     id: 4,
     name: 'Cherry',
     isChecked: false,
-  },];
-
+  },
+];
 
 const Lesson = () => {
   const classes = useStyles();
@@ -32,19 +33,21 @@ const Lesson = () => {
   const [products, setProducts] = useState([...PRODUCTS]);
   const [inputValue, setInputValue] = useState('');
 
-  const handleChange = (event) => {
+  const handleInputValue = (event) => {
     setInputValue(event.target.value)
-  }
+  };
+
   const showInput = (id) => {
     const copyProduts = [...products];
 
     const result = copyProduts.find((item) => item.id === id)
+
     result.isChecked = !result.isChecked
 
     setProducts(copyProduts);
   };
 
-  const Blur = (id) => {
+  const onBlur = (id) => {
     if (inputValue !== '') {
       const copyProduts = [...products];
 
@@ -52,6 +55,7 @@ const Lesson = () => {
 
       result.isChecked = !result.isChecked
       result.name = inputValue;
+
       setProducts(copyProduts);
       setInputValue('');
     }
@@ -61,9 +65,9 @@ const Lesson = () => {
     <div className={classes.root}>
       <ProductList
         products={products}
-        handleChange={handleChange}
+        handleInputValue={handleInputValue}
         showInput={showInput}
-        Blur={Blur}
+        onBlur={onBlur}
       />
     </div>
   );

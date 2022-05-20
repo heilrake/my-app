@@ -2,21 +2,25 @@ import React from 'react';
 import { List, ListItem, Link, TextField } from '@mui/material'
 
 
-const ProductList = ({ products, handleChange, showInput, Blur }) => {
+const ProductList = ({ products, handleInputValue, showInput, onBlur }) => {
   return (
     <div>
       {products.map((item, index) => (
         <List key={index}>
           <ListItem>
             {item.name}
-            {
-              !item.isChecked ?
-                <Link sx={{ margin: '0px 10px' }} href="#"
-                  onClick={() => showInput(item.id)} >
+            {item.isChecked ?
+              (<TextField onChange={handleInputValue} onBlur={() => onBlur(item.id)} />)
+              :
+              (
+                <Link
+                  sx={{ margin: '0px 10px' }}
+                  href="#"
+                  onClick={() => showInput(item.id)}
+                >
                   Change
                 </Link>
-                :
-                <TextField onChange={handleChange} onBlur={() => Blur(item.id)} />
+              )
             }
           </ListItem>
         </List>

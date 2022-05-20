@@ -25,6 +25,7 @@ const PRODUCTS = [
     isChecked: false,
   },];
 
+
 const Lesson = () => {
   const classes = useStyles();
 

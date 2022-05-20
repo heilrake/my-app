@@ -28,6 +28,7 @@ const TableOfUsers = ({ users, deleteMessage }) => (
               <Link href='#' onClick={() => deleteMessage(index)}>Delete!</Link >
             </TableCell>
 
+
           </TableRow>
         ))}
       </TableBody>

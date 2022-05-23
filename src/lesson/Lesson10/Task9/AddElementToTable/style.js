@@ -26,24 +26,6 @@ const useStyles = createUseStyles({
       flexDirection: "column",
       gap: '10px',
     },
-
-    "& .red": {
-      "& .MuiOutlinedInput-root": {
-
-        "& > fieldset": {
-          borderColor: 'red',
-        }
-      },
-    },
-
-    "& .green": {
-      "& .MuiOutlinedInput-root": {
-
-        "& > fieldset": {
-          borderColor: 'green',
-        }
-      },
-    }
   },
 
 });

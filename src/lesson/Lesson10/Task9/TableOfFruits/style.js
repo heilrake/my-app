@@ -22,30 +22,6 @@ const useStyles = createUseStyles({
         textAlign: 'center',
       },
     },
-
-    "& > form ": {
-      display: "flex",
-      flexDirection: "column",
-      gap: '10px',
-    },
-
-    "& .red": {
-      "& .MuiOutlinedInput-root": {
-
-        "& > fieldset": {
-          borderColor: 'red',
-        }
-      },
-    },
-
-    "& .green": {
-      "& .MuiOutlinedInput-root": {
-
-        "& > fieldset": {
-          borderColor: 'green',
-        }
-      },
-    }
   },
 
 });

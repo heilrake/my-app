@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import ProductList from './component/ProductList.jsx';
+import ProductList from './ProductList';
 
-import useStyles from './style/style';
+import useStyles from './style';
 
 const PRODUCTS = [
   {
@@ -34,26 +34,23 @@ const Lesson = () => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputValue = (event) => {
-    setInputValue(event.target.value)
+    setInputValue(event.target.value);
   };
 
   const showInput = (id) => {
     const copyProduts = [...products];
+    const result = copyProduts.find((item) => item.id === id);
 
-    const result = copyProduts.find((item) => item.id === id)
-
-    result.isChecked = !result.isChecked
-
+    result.isChecked = !result.isChecked;
     setProducts(copyProduts);
   };
 
   const onBlur = (id) => {
     if (inputValue !== '') {
       const copyProduts = [...products];
-
       const result = copyProduts.find((item) => item.id === id);
 
-      result.isChecked = !result.isChecked
+      result.isChecked = !result.isChecked;
       result.name = inputValue;
 
       setProducts(copyProduts);

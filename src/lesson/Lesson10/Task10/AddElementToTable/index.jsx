@@ -3,7 +3,7 @@ import React from 'react';
 import { TextField, Box, Button } from '@mui/material';
 import { useForm } from "react-hook-form";
 
-import useStyles from './style/style';
+import useStyles from './style';
 
 const AddElementToTable = ({ addElement }) => {
   const classes = useStyles();
@@ -29,7 +29,7 @@ const AddElementToTable = ({ addElement }) => {
       count: null,
       priceOfOne: null
     })
-  }
+  };
 
   const onSubmit = (data) => {
     addElement(data);
@@ -39,7 +39,7 @@ const AddElementToTable = ({ addElement }) => {
     <div>
       <Box className={classes.root}>
         <p>Add product</p>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className={classes.formSection} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             {...register("name", { required: true })}
             placeholder='name'

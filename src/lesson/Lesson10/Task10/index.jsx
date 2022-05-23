@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import TableOfFructs from "./TableOfFructs";
+import TableOfFructs from "./TableOfFruits";
 import AddElementToTable from "./AddElementToTable";
-import SumOfFructs from './SumOfFructs'
+import SumOfFructs from './SumOfElement'
 
 const FRUITS = [
   {
@@ -10,27 +10,30 @@ const FRUITS = [
     name: 'Banana',
     count: 25,
     priceOfOne: 4,
+    isChecked: true,
   },
   {
     id: 2,
     name: 'Apple',
     count: 17,
     priceOfOne: 2,
+    isChecked: true,
   },
   {
     id: 3,
     name: 'Cherry',
     count: 225,
     priceOfOne: 1,
+    isChecked: true,
   },
   {
     id: 4,
     name: 'Orange',
     count: 5,
     priceOfOne: 7,
+    isChecked: true,
   },
 ];
-
 
 const Lesson = () => {
   const [fruits, setFruits] = useState([...FRUITS]);
@@ -46,15 +49,34 @@ const Lesson = () => {
   const addElement = (data) => {
     const copyProducts = [...fruits];
 
-    copyProducts.push(data);
+    copyProducts.push({
+      id: copyProducts.length + 1,
+      name: data.name,
+      count: data.count,
+      priceOfOne: data.priceOfOne,
+      isChecked: true
+    });
 
-    setFruits(copyProducts)
-  }
+    setFruits(copyProducts);
+  };
 
+  const handleCheckbox = (id) => {
+    const copyProducts = [...fruits];
+
+    const result = copyProducts.find((item) => item.id === id);
+
+    result.isChecked = !result.isChecked;
+
+    setFruits(copyProducts);
+  };
 
   return (
     <div>
-      <TableOfFructs fruits={fruits} deleteElement={deleteElement} />
+      <TableOfFructs
+        fruits={fruits}
+        deleteElement={deleteElement}
+        handleCheckbox={handleCheckbox}
+      />
       <SumOfFructs fruits={fruits} />
       <AddElementToTable addElement={addElement} />
     </div>

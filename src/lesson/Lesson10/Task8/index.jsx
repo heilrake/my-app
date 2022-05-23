@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import TableOfProducts from "./component/TableOfFruct";
-import AddElementToTable from "./component/AddElementToTable";
+import TableOfProducts from "./TableOfFruits";
+import AddElementToTable from "./AddElementToTable";
 
 const PRODUCTS = [
   {
@@ -52,10 +52,7 @@ const Lesson = () => {
   return (
     <div>
       <TableOfProducts products={products} deleteElement={deleteElement} />
-      <AddElementToTable
-        addElement={addElement}
-
-      />
+      <AddElementToTable addElement={addElement} />
     </div>
   );
 };

@@ -33,7 +33,9 @@ const TableOfFructs = ({ fruits, deleteElement }) => {
             <TableCell>{item.priceOfOne}</TableCell>
             <TableCell>{item.priceOfOne * item.count}</TableCell>
             <TableCell>
-              <Button onClick={() => deleteElement(index)} variant="contained">Delete</Button>
+              <Button onClick={() => deleteElement(index)} variant="contained">
+                Delete
+              </Button>
             </TableCell>
           </TableRow>
         ))}

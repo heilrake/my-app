@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import TableOfProducts from "./component/TableOfProducts";
+import TableOfProducts from "./TableOfProducts";
 
 const PRODUCTS = [
   {

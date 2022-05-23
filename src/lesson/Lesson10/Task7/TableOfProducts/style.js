@@ -14,6 +14,7 @@ const useStyles = createUseStyles({
     "&.MuiTable-root ": {
       width: 'fit-content',
       margin: '0px auto',
+
       "&.MuiTableCell-root ": {
         textAlign: 'center',
       },

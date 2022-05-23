@@ -10,10 +10,11 @@ import {
   Button,
 } from '@mui/material';
 
-import useStyles from '../style/style';
+import useStyles from './style';
 
 const TableOfProducts = ({ products, deleteElement }) => {
   const classes = useStyles();
+
   return (
     <Table className={classes.root}>
       <TableHead>
@@ -21,8 +22,8 @@ const TableOfProducts = ({ products, deleteElement }) => {
           <TableCell>Name</TableCell>
           <TableCell>Count</TableCell>
           <TableCell>Price of one</TableCell>
-          <TableCell colSpan={0}>Price of all</TableCell>
-          <TableCell></TableCell>
+          <TableCell>Price of all</TableCell>
+          <TableCell />
         </TableRow>
       </TableHead>
       <TableBody>
@@ -33,7 +34,9 @@ const TableOfProducts = ({ products, deleteElement }) => {
             <TableCell>{item.priceOfOne}</TableCell>
             <TableCell>{item.priceOfOne * item.count}</TableCell>
             <TableCell>
-              <Button onClick={() => deleteElement(index)} variant="contained">Delete</Button>
+              <Button onClick={() => deleteElement(index)} variant="contained">
+                Delete
+              </Button>
             </TableCell>
           </TableRow>
         ))}

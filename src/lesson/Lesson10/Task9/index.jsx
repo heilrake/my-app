@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import TableOfFructs from "./TableOfFructs";
+import TableOfFructs from "./TableOfFruits";
 import AddElementToTable from "./AddElementToTable";
-import SumOfFructs from './SumOfFructs'
+import SumOfFructs from './SumOfFruits'
 
 const FRUITS = [
   {

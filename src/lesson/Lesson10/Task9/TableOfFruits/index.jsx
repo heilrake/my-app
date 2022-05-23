@@ -9,7 +9,7 @@ import {
   Button,
 } from '@mui/material';
 
-import useStyles from './style/style';
+import useStyles from './style';
 
 const TableOfFructs = ({ fruits, deleteElement }) => {
   const classes = useStyles();

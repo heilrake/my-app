@@ -3,12 +3,12 @@ import React from 'react';
 import { TextField, Box, Button } from '@mui/material';
 import { useForm } from "react-hook-form";
 
-import useStyles from './style/style';
+import useStyles from './style';
 
 const AddElementToTable = ({ addElement }) => {
   const classes = useStyles();
 
-  const { register, getValues, handleSubmit, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
       name: '',
       count: null,
@@ -23,13 +23,24 @@ const AddElementToTable = ({ addElement }) => {
     return
   };
 
+  const clearInput = () => {
+    reset({
+      name: '',
+      count: null,
+      priceOfOne: null
+    })
+  };
 
+  const onSubmit = (data) => {
+    addElement(data);
+    clearInput();
+  };
 
   return (
     <div>
       <Box className={classes.root}>
         <p>Add product</p>
-        <form onSubmit={handleSubmit(addElement)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
             {...register("name", { required: true })}
             placeholder='name'

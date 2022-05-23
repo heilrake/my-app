@@ -1,6 +1,6 @@
 import './App.css';
 
-import CurrentTask from './lesson/Lesson10/Task6';
+import CurrentTask from './lesson/Lesson10/Task7';
 
 const App = () => {
   return (

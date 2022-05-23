@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-import TableOfProducts from "./TableOfFruits";
-import AddElementToTable from "./AddElementToTable";
+import TableOfProducts from "./TableOfProducts";
 
 const PRODUCTS = [
   {
@@ -41,18 +40,9 @@ const Lesson = () => {
     setProducts(copyProducts);
   };
 
-  const addElement = (data) => {
-    const copyProducts = [...products];
-
-    copyProducts.push(data);
-
-    setProducts(copyProducts);
-  }
-
   return (
     <div>
       <TableOfProducts products={products} deleteElement={deleteElement} />
-      <AddElementToTable addElement={addElement} />
     </div>
   );
 };

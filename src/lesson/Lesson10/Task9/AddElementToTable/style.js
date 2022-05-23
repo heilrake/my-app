@@ -10,7 +10,13 @@ const useStyles = createUseStyles({
     height: '100%',
     fontSize: '24px',
 
-    "& .MuiOutlinedInput-root": {
+  },
+
+  formSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    "&.MuiOutlinedInput-root": {
       margin: "15px 0px",
     },
 
@@ -21,7 +27,10 @@ const useStyles = createUseStyles({
         textAlign: 'center',
       },
     },
-    "& > form ": {
+    "&.css-1u3bzj6-MuiFormControl-root-MuiTextField-root": {
+      margin: "10px",
+    },
+    form: {
       display: "flex",
       flexDirection: "column",
       gap: '10px',

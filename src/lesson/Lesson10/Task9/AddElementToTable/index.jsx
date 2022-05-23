@@ -37,32 +37,30 @@ const AddElementToTable = ({ addElement }) => {
   };
 
   return (
-    <div>
-      <Box className={classes.root}>
-        <p>Add product</p>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            {...register("name", { required: true })}
-            placeholder='name'
-            className={getBorderColor('name')}
-          />
-          <TextField
-            {...register("count", { required: true })}
-            placeholder='count'
-            type='number'
-            defaultValue=''
-            className={getBorderColor('count')}
-          />
-          <TextField
-            {...register("priceOfOne", { required: true })}
-            placeholder='price of one'
-            type='number'
-            className={getBorderColor('priceOfOne')}
-          />
-          <Button variant="contained" type='submit'>Add product</Button>
-        </form>
-      </Box>
-    </div>
+    <Box className={classes.root} >
+      <p>Add product</p>
+      <form className={classes.formSection} onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          {...register("name", { required: true })}
+          placeholder='name'
+          className={getBorderColor('name')}
+        />
+        <TextField
+          {...register("count", { required: true })}
+          placeholder='count'
+          type='number'
+          defaultValue=''
+          className={getBorderColor('count')}
+        />
+        <TextField
+          {...register("priceOfOne", { required: true })}
+          placeholder='price of one'
+          type='number'
+          className={getBorderColor('priceOfOne')}
+        />
+        <Button variant="contained" type='submit'>Add product</Button>
+      </form>
+    </Box>
   );
 };
 

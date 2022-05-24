@@ -20,7 +20,6 @@ const AddElementToTable = ({ addElement }) => {
     if (errors[name]) {
       return 'red';
     }
-    return
   };
 
   const clearInput = () => {

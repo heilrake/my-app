@@ -12,21 +12,13 @@ const useStyles = createUseStyles({
   },
 
   tableSection: {
-    "&.MuiOutlinedInput-root": {
-      margin: "15px 0px",
-    },
-
     "&.MuiTable-root ": {
       width: 'fit-content',
       margin: '0px auto',
+
       "&.MuiTableCell-root ": {
         textAlign: 'center',
       },
-    },
-    "& > form ": {
-      display: "flex",
-      flexDirection: "column",
-      gap: '10px',
     },
   },
 });

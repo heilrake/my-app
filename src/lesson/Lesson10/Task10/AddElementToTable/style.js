@@ -12,30 +12,13 @@ const useStyles = createUseStyles({
   },
 
   formSection: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     gap: '10px',
-    "&.MuiOutlinedInput-root": {
-      margin: "15px 0px",
-    },
 
-    "&.MuiTable-root ": {
-      width: 'fit-content',
-      margin: '0px auto',
-      "&.MuiTableCell-root ": {
-        textAlign: 'center',
-      },
-    },
-
-    "&.css-1u3bzj6-MuiFormControl-root-MuiTextField-root": {
-      margin: "10px",
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      gap: '10px',
+    "& .red .MuiOutlinedInput-root > fieldset": {
+      borderColor: 'red',
     },
   },
-
 });
 export default useStyles;

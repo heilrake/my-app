@@ -54,7 +54,7 @@ const Lesson = () => {
       name: data.name,
       count: data.count,
       priceOfOne: data.priceOfOne,
-      isChecked: true
+      isChecked: true,
     });
 
     setFruits(copyProducts);

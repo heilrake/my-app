@@ -7,57 +7,96 @@ const WORKERS = [
     id: 1,
     firstName: 'Bob',
     lastName: 'Marley',
-    dayOfWorked: null,
-    payRate: null,
-    isChecked: true,
+    dayOfWorked: {
+      value: '12',
+      isShowInput: false,
+    },
+    payRate: {
+      value: '009',
+      isShowInput: false
+    },
   },
   {
     id: 2,
     firstName: 'Jonh',
     lastName: 'Nickelson',
-    dayOfWorked: null,
-    payRate: null,
-    isChecked: true,
+    dayOfWorked: {
+      value: '',
+      isShowInput: false,
+    },
+    payRate: {
+      value: '',
+      isShowInput: false
+    },
   },
   {
     id: 3,
     firstName: 'Annet',
     lastName: 'Hilton',
-    dayOfWorked: null,
-    payRate: null,
-    isChecked: true,
+    dayOfWorked: {
+      value: '',
+      isShowInput: false,
+    },
+    payRate: {
+      value: '',
+      isShowInput: false
+    },
   },
   {
     id: 4,
     firstName: 'Jordan',
     lastName: 'Bush',
-    dayOfWorked: null,
-    payRate: null,
-    isChecked: true,
+    dayOfWorked: {
+      value: '',
+      isShowInput: false,
+    },
+    payRate: {
+      value: '',
+      isShowInput: false,
+    },
   },
 ];
 const Lesson = () => {
   const [workers, setWorkers] = useState([...WORKERS]);
-  const [inputValue, setInputValue] = useState({ dayOfWorked: null, payRate: null });
+  const [inputValue, setInputValue] = useState({ payRate: '', dayOfWorked: '' });
 
   const handleInputValue = ({ target: { name, value } }) => {
     setInputValue((prevState) => ({ ...prevState, [name]: value }))
   };
-  const onBlur = (id) => {
-    if (inputValue !== '') {
-      const copyWorkers = [...workers];
 
-      const result = copyWorkers.find((item) => item.id === id);
+  console.log(inputValue);
 
-      result.isChecked = !result.isChecked
-      result.dayOfWorked = inputValue.dayOfWorked;
-      result.payRate = inputValue.payRate;
+  const onBlur = (id, field) => {
 
+
+    const copyWorkers = [...workers];
+
+    const result = copyWorkers.find((item) => item.id === id);
+
+    if (inputValue[field] !== '' || result[field].isShowInput) {
+      result[field].value = inputValue[field];
+
+      result[field].isShowInput = !result[field].isShowInput;
       setWorkers(copyWorkers);
       setInputValue('');
     }
+  };
 
-  }
+  const showInput = (id, field) => {
+
+    const copyWorkers = [...workers];
+
+    const result = copyWorkers.find((item) => item.id === id)
+    if (inputValue[field] !== '' || result[field].isShowInput) {
+
+      result[field].isShowInput = !result[field].isShowInput;
+      setWorkers(copyWorkers);
+    }
+
+
+
+
+  };
 
   return (
     <div>
@@ -65,6 +104,8 @@ const Lesson = () => {
         workers={workers}
         handleInputValue={handleInputValue}
         onBlur={onBlur}
+        showInput={showInput}
+        inputValue={inputValue}
       />
     </div>
   );

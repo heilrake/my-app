@@ -8,13 +8,14 @@ import {
   TableRow,
   Box,
   TextField,
+  Typography,
 } from '@mui/material';
 
 import useStyles from './style';
 
-const TableOFWorkers = ({ workers, handleInputValue, onBlur }) => {
+const TableOFWorkers = ({ workers, handleInputValue, onBlur, showInput, inputValue }) => {
   const classes = useStyles();
-
+  console.log(inputValue)
   return (
     <Box className={classes.root}>
       <Table className={classes.tableSection}>
@@ -34,31 +35,37 @@ const TableOFWorkers = ({ workers, handleInputValue, onBlur }) => {
               <TableCell>{item.lastName}</TableCell>
               <TableCell>
                 {
-                  item.isChecked ?
+                  !item.payRate.isShowInput ?
                     (<TextField
                       name='payRate'
-                      value={item.payRate}
+                      value={inputValue}
                       type='number'
                       sx={{ width: '110px' }}
-                      onBlur={() => onBlur(item.id)}
+                      onBlur={() => onBlur(item.id, 'payRate')}
                       onChange={handleInputValue}
                       placeholder='pay rate'
                     />) : (
-                      <p>{item.payRate}</p>)
+                      <Typography onClick={() => showInput(item.id, 'payRate')}>{item.payRate.value}</Typography>)
                 }
               </TableCell>
               <TableCell>
-                <TextField
-                  name='days'
-                  value={item.dayOfWorked}
-                  type='number'
-                  onBlur={() => onBlur(item.id)}
-                  sx={{ width: '110px' }}
-                  onChange={handleInputValue}
-                  placeholder='days'
-                />
+                {
+                  !item.dayOfWorked.isShowInput ? (
+                    <TextField
+                      name='dayOfWorked'
+                      value={inputValue}
+                      type='number'
+                      onBlur={() => onBlur(item.id, 'dayOfWorked')}
+                      sx={{ width: '110px' }}
+                      onChange={handleInputValue}
+                      placeholder='days'
+                    />
+                  ) : (
+                    <Typography onClick={() => showInput(item.id, 'dayOfWorked')}>{item.dayOfWorked.value}</Typography>)
+                }
+
               </TableCell>
-              <TableCell></TableCell>
+              <TableCell> {item.payRate.value * item.dayOfWorked.value}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -28,8 +28,7 @@ const Task5 = () => {
       result.name = inputValue;
       setItems(copyItems);
       setInputValue('');
-    }
-
+    };
   }
 
   const showInput = (id) => {

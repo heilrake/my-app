@@ -13,19 +13,18 @@ import {
 
 import useStyles from './style';
 
-const TableOFWorkers = ({ workers, handleInputValue, onBlur, showInput, inputValue }) => {
+
+const TableOFWorkers = ({ workers, handleInputValue, onBlur, showInput, inputValue, tableNames }) => {
   const classes = useStyles();
-  console.log(inputValue)
+
   return (
     <Box className={classes.root}>
       <Table className={classes.tableSection}>
         <TableHead sx={{ fontWeight: '700' }}>
           <TableRow >
-            <TableCell>First name</TableCell>
-            <TableCell>Last name</TableCell>
-            <TableCell>Pay rate</TableCell>
-            <TableCell>Days of worked</TableCell>
-            <TableCell>Salary</TableCell>
+            {
+              tableNames.map((item, index) => <TableCell key={index}>{item}</TableCell>)
+            }
           </TableRow>
         </TableHead>
         <TableBody>
@@ -35,35 +34,41 @@ const TableOFWorkers = ({ workers, handleInputValue, onBlur, showInput, inputVal
               <TableCell>{item.lastName}</TableCell>
               <TableCell>
                 {
-                  !item.payRate.isShowInput ?
-                    (<TextField
-                      name='payRate'
-                      value={inputValue}
-                      type='number'
-                      sx={{ width: '110px' }}
-                      onBlur={() => onBlur(item.id, 'payRate')}
-                      onChange={handleInputValue}
-                      placeholder='pay rate'
-                    />) : (
-                      <Typography onClick={() => showInput(item.id, 'payRate')}>{item.payRate.value}</Typography>)
+                  item.payRate.isShowInput ?
+                    (<Typography onClick={() => showInput(item.id, 'payRate')}>
+                      {item.payRate.value}
+                    </Typography>
+                    ) : (
+                      <TextField
+                        name='payRate'
+                        value={inputValue.payRate.value}
+                        type='number'
+                        sx={{ width: '110px' }}
+                        onBlur={() => onBlur(item.id, 'payRate')}
+                        onChange={handleInputValue}
+                        placeholder='pay rate'
+                      />
+                    )
                 }
               </TableCell>
               <TableCell>
                 {
-                  !item.dayOfWorked.isShowInput ? (
+                  item.dayOfWorked.isShowInput ? (
+                    <Typography onClick={() => showInput(item.id, 'dayOfWorked')}>
+                      {item.dayOfWorked.value}
+                    </Typography>
+                  ) : (
                     <TextField
                       name='dayOfWorked'
-                      value={inputValue}
+                      value={inputValue.dayOfWorked.value}
                       type='number'
                       onBlur={() => onBlur(item.id, 'dayOfWorked')}
                       sx={{ width: '110px' }}
                       onChange={handleInputValue}
                       placeholder='days'
                     />
-                  ) : (
-                    <Typography onClick={() => showInput(item.id, 'dayOfWorked')}>{item.dayOfWorked.value}</Typography>)
+                  )
                 }
-
               </TableCell>
               <TableCell> {item.payRate.value * item.dayOfWorked.value}</TableCell>
             </TableRow>

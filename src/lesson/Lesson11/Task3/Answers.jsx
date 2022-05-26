@@ -3,21 +3,18 @@ import React from 'react';
 import { Radio } from 'antd';
 import useStyles from './style';
 
-const Answers = ({ item, onChange }) => {
+const Answers = ({ item, index, handleChangeAnswer }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <p>{item.name} </p>
-      <Radio.Group
-        onChange={onChange} >
-
-        {item.answers.map((answer, index) => (
-
+      <Radio.Group>
+        {item.answers.map((answer, answerIndex) => (
           <Radio
-            key={index}
+            onChange={() => handleChangeAnswer(answer.text)}
+            key={answerIndex}
             value={answer.id}
-            label={answer.text}
           >
             {answer.text}
           </Radio>

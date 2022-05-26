@@ -16,7 +16,22 @@ const useStyles = createUseStyles({
     "& .green": {
       color: 'green',
     },
+  },
 
+  ArrowButtons: {
+    display: 'flex',
+    gap: '20px',
+    justifyContent: 'center',
+  },
+
+  ButtonArrow: {
+    width: '55px',
+    height: '55px',
+    marginBottom: '20px',
+  },
+
+  IconArrow: {
+    fontSize: '28px',
   },
 });
 

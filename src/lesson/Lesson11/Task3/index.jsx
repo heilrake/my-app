@@ -44,15 +44,14 @@ const QUESTIONS = [
 const Lesson = () => {
   const classes = useStyles();
   const [questions, setQuestions] = useState([...QUESTIONS]);
-
   const [countPage, setCountPage] = useState(0);
   const [isShowQuestions, setIsShowQuestions] = useState(true);
 
   const handlePage = (value) => {
-    setCountPage(value)
+    setCountPage(value);
   };
 
-  const sliceWorkers = () => {
+  const sliceQuestions = () => {
     const slice = 1;
 
     const copyQuestions = [...questions];
@@ -76,21 +75,36 @@ const Lesson = () => {
 
     if (copyQuestions[id].answer === copyQuestions[id].right)
       return 'green';
+
     return 'red';
   };
 
+  const disableButton = () => {
+    return questions.find(item =>
+      item.answer === ''
+    )
+  };
 
+  const showResults = () => {
+    const copyQuestions = [...questions];
+
+    if (!isShowQuestions) {
+      copyQuestions.forEach(item => {
+        item.answer = ''
+      })
+    }
+    setIsShowQuestions(!isShowQuestions);
+  };
 
   return (
     <div className={classes.root}>
       {isShowQuestions ?
-        <div> {
-          sliceWorkers().map((item, index) => (
+        (<div> {
+          sliceQuestions().map((item, index) => (
             <div key={index}>
               <Answers
                 handleChangeAnswer={handleChangeAnswer}
-                item={item}
-                index={index}
+                questions={item}
               />
             </div>
           ))
@@ -98,18 +112,21 @@ const Lesson = () => {
           <ArrowButtons
             handlePage={handlePage}
             countPage={countPage}
-          /> </div> :
-        <div>{
-          questions.map((item, index) => (
-            <div index={index}>
-              <div>Your answer <p className={colorText(index)}>{item.answer}</p></div>
-              <p>True answer {item.right}</p>
-            </div>
-          ))
-        }
-        </div>
+          /> </div>) : (
+          <div>{
+            questions.map((item, index) => (
+              <div style={{ margin: '25px 0px' }} key={index}>
+                Your answer is
+                <p style={{ margin: '0px' }} className={colorText(index)}>
+                  {item.answer}
+                </p>
+                True answer is {item.right}
+              </div>
+            ))
+          }
+          </div>)
       }
-      <Button onClick={() => setIsShowQuestions(!isShowQuestions)}>
+      <Button disabled={disableButton()} onClick={showResults}>
         {isShowQuestions ? 'Check Answers' : ' Try again'}
       </Button>
     </div >

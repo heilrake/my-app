@@ -10,10 +10,11 @@ const useStyles = createUseStyles({
     height: '100%',
     fontSize: '24px',
 
-    "& .red ": {
+    "& .noRight ": {
       color: 'red',
     },
-    "& .green": {
+
+    "& .right": {
       color: 'green',
     },
   },
@@ -37,7 +38,6 @@ const useStyles = createUseStyles({
   Result: {
     display: 'flex',
     margin: '25px 0px',
-
   },
 
   AnswersResult: {

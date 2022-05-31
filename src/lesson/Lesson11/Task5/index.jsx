@@ -77,7 +77,7 @@ const Lesson = () => {
   };
 
 
-  const colorText = (indexQuestion, item) => {
+  const getcolorText = (indexQuestion, item) => {
     const copyQuestions = [...questions];
 
     const result = copyQuestions[indexQuestion].right.includes(item);
@@ -94,38 +94,41 @@ const Lesson = () => {
 
     if (!isShowQuestions) {
       copyQuestions.forEach(item => {
-        item.answer = []
+        item.answer = [];
       })
     }
     setIsShowQuestions(!isShowQuestions);
   };
 
-
   return (
     <div className={classes.root}>
       {isShowQuestions ?
-        (<div> {
-          sliceQuestions().map((item, index) => (
-            <div key={index}>
-              <Answers
-                handleChangeAnswer={handleChangeAnswer}
-                questions={item}
-              />
-            </div>
-          ))
-        }
-          <ArrowButtons
-            handlePage={handlePage}
-            countPage={countPage}
-          /> </div>) : (
-          <div>{
-            questions.map((item, indexQuestion) => (
+        (
+          <div> {
+            sliceQuestions().map((item, index) => (
+              <div key={index}>
+                <Answers
+                  handleChangeAnswer={handleChangeAnswer}
+                  questions={item}
+                />
+              </div>
+            ))
+          }
+            <ArrowButtons
+              handlePage={handlePage}
+              countPage={countPage}
+            />
+          </div>
+        ) : (
+          <div>
+            {questions.map((item, indexQuestion) => (
               <div className={classes.Result} key={indexQuestion}>
-                <div className={classes.AnswersResult}> Your answer is
+                <div className={classes.AnswersResult}>
+                  <p>Your answer is</p>
                   {item.answer.map((item, indexAnswer) => (
                     <div key={indexAnswer} >
-                      <p style={{ margin: '0px 5px' }}
-                        className={colorText(indexQuestion, item) ? 'green' : ' red'}
+                      <p
+                        className={getcolorText(indexQuestion, item) ? 'right' : 'noRight'}
                       >
                         {item}
                       </p>
@@ -134,21 +137,21 @@ const Lesson = () => {
                   }
                 </div>
                 <div className={classes.AnswersResult}>
-                  True answer is
-                  {
-                    item.right.map((item, indexQuestionRight) => (
-                      <div key={indexQuestionRight}>
-                        <p style={{ margin: '0px 5px' }}>
-                          {item}
-                        </p>
-                      </div>
-                    ))
+                  <p>True answer is</p>
+                  {item.right.map((item, indexQuestionRight) => (
+                    <div key={indexQuestionRight}>
+                      <p>
+                        {item}
+                      </p>
+                    </div>
+                  ))
                   }
                 </div>
               </div>
             ))
-          }
-          </div>)
+            }
+          </div>
+        )
       }
       <Button disabled={disableButton()} onClick={showResults}>
         {isShowQuestions ? 'Check Answers' : ' Try again'}

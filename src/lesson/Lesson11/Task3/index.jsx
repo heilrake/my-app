@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
-import Answers from './Answers'
-import ArrowButtons from './ArrowButtons';
 import { Button } from 'antd';
+
+import Answers from './Answers';
+import ArrowButtons from './ArrowButtons';
 
 import useStyles from './style';
 
@@ -43,6 +43,7 @@ const QUESTIONS = [
 
 const Lesson = () => {
   const classes = useStyles();
+
   const [questions, setQuestions] = useState([...QUESTIONS]);
   const [countPage, setCountPage] = useState(0);
   const [isShowQuestions, setIsShowQuestions] = useState(true);
@@ -74,26 +75,15 @@ const Lesson = () => {
     const copyQuestions = [...questions];
 
     if (copyQuestions[id].answer === copyQuestions[id].right)
-      return 'right';
+      return 'correct';
 
-    return 'noRight';
+    return 'incorrect';
   };
 
   const disableButton = () => {
     return questions.find(item =>
       item.answer === ''
     )
-  };
-
-  const showResults = () => {
-    const copyQuestions = [...questions];
-
-    if (!isShowQuestions) {
-      copyQuestions.forEach(item => {
-        item.answer = ''
-      })
-    }
-    setIsShowQuestions(!isShowQuestions);
   };
 
   return (
@@ -130,7 +120,7 @@ const Lesson = () => {
           </div>
         )
       }
-      <Button disabled={disableButton()} onClick={showResults}>
+      <Button disabled={disableButton()} onClick={() => setIsShowQuestions(!isShowQuestions)}>
         {isShowQuestions ? 'Check Answers' : ' Try again'}
       </Button>
     </div >

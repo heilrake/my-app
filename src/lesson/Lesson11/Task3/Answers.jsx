@@ -6,7 +6,6 @@ import useStyles from './style';
 const Answers = ({ questions, handleChangeAnswer }) => {
   const classes = useStyles();
 
-
   return (
     <div className={classes.root}>
       <p>{questions.name} </p>

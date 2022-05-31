@@ -70,13 +70,13 @@ const Lesson = () => {
     setQuestions(copyQuestions);
   };
 
-  const colorText = (id) => {
+  const getColorText = (id) => {
     const copyQuestions = [...questions];
 
     if (copyQuestions[id].answer === copyQuestions[id].right)
-      return 'green';
+      return 'right';
 
-    return 'red';
+    return 'noRight';
   };
 
   const disableButton = () => {
@@ -99,32 +99,36 @@ const Lesson = () => {
   return (
     <div className={classes.root}>
       {isShowQuestions ?
-        (<div> {
-          sliceQuestions().map((item, index) => (
-            <div key={index}>
-              <Answers
-                handleChangeAnswer={handleChangeAnswer}
-                questions={item}
-              />
-            </div>
-          ))
-        }
-          <ArrowButtons
-            handlePage={handlePage}
-            countPage={countPage}
-          /> </div>) : (
-          <div>{
-            questions.map((item, index) => (
-              <div style={{ margin: '25px 0px' }} key={index}>
-                Your answer is
-                <p style={{ margin: '0px' }} className={colorText(index)}>
-                  {item.answer}
-                </p>
-                True answer is {item.right}
+        (
+          <div>
+            {sliceQuestions().map((item, index) => (
+              <div key={index}>
+                <Answers
+                  handleChangeAnswer={handleChangeAnswer}
+                  questions={item}
+                />
               </div>
             ))
-          }
-          </div>)
+            }
+            <ArrowButtons
+              handlePage={handlePage}
+              countPage={countPage}
+            />
+          </div>
+        ) : (
+          <div>
+            {questions.map((item, index) => (
+              <div style={{ margin: '25px 0px' }} key={index}>
+                <p>Your answer is</p>
+                <p className={getColorText(index)}>
+                  {item.answer}
+                </p>
+                <p>True answer is {item.right}</p>
+              </div>
+            ))
+            }
+          </div>
+        )
       }
       <Button disabled={disableButton()} onClick={showResults}>
         {isShowQuestions ? 'Check Answers' : ' Try again'}

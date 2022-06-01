@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { Radio } from 'antd';
+
 import useStyles from './style';
 
 const Answers = ({ questions, handleChangeAnswer }) => {

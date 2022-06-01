@@ -52,18 +52,6 @@ const Lesson = () => {
     setCountPage(value);
   };
 
-  const sliceQuestions = () => {
-    const slice = 1;
-
-    const copyQuestions = [...questions];
-    const result = [];
-
-    for (let s = 0, e = slice; s < copyQuestions.length; s += slice, e += slice)
-      result.push(copyQuestions.slice(s, e));
-
-    return result[countPage];
-  };
-
   const handleChangeAnswer = (answerId) => {
     const copyQuestions = [...questions];
 
@@ -72,9 +60,7 @@ const Lesson = () => {
   };
 
   const getColorText = (id) => {
-    const copyQuestions = [...questions];
-
-    if (copyQuestions[id].answer === copyQuestions[id].right)
+    if (questions[id].answer === questions[id].right)
       return 'correct';
 
     return 'incorrect';
@@ -86,20 +72,29 @@ const Lesson = () => {
     )
   };
 
+  const showAnswers = () => {
+    const copyQuestions = [...questions];
+
+    if (!isShowQuestions) {
+      copyQuestions.forEach(element => {
+        element.answer = ''
+      })
+      setQuestions(copyQuestions);
+    }
+
+    setCountPage(0);
+    setIsShowQuestions(!isShowQuestions);
+  };
+
   return (
     <div className={classes.root}>
       {isShowQuestions ?
         (
           <div>
-            {sliceQuestions().map((item, index) => (
-              <div key={index}>
-                <Answers
-                  handleChangeAnswer={handleChangeAnswer}
-                  questions={item}
-                />
-              </div>
-            ))
-            }
+            <Answers
+              handleChangeAnswer={handleChangeAnswer}
+              questions={questions[countPage]}
+            />
             <ArrowButtons
               handlePage={handlePage}
               countPage={countPage}
@@ -120,9 +115,14 @@ const Lesson = () => {
           </div>
         )
       }
-      <Button disabled={disableButton()} onClick={() => setIsShowQuestions(!isShowQuestions)}>
-        {isShowQuestions ? 'Check Answers' : ' Try again'}
-      </Button>
+      {isShowQuestions ?
+        <Button disabled={disableButton()} onClick={() => showAnswers()}>
+          Check Answers
+        </Button> :
+        <Button onClick={() => showAnswers()}>
+          Try again
+        </Button>
+      }
     </div >
   );
 };

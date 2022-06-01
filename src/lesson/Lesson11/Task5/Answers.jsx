@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { Checkbox } from 'antd';
+
 import useStyles from './style';
 
 const Answers = ({ questions, handleChangeAnswer }) => {
@@ -12,7 +12,7 @@ const Answers = ({ questions, handleChangeAnswer }) => {
       <Checkbox.Group>
         {questions.answers.map((answer, answerIndex) => (
           <Checkbox
-            onChange={(event) => handleChangeAnswer(answer.text, event, answerIndex)}
+            onChange={(event) => handleChangeAnswer(answer.text, event)}
             key={answerIndex}
             value={answer.text}
           >

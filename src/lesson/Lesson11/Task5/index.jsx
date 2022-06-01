@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { Button } from 'antd';
 
 import Answers from './Answers'
 import ArrowButtons from './ArrowButtons';
-import { Button } from 'antd';
 
 import useStyles from './style';
 
@@ -43,51 +43,34 @@ const QUESTIONS = [
 
 const Lesson = () => {
   const classes = useStyles();
+
   const [questions, setQuestions] = useState([...QUESTIONS]);
   const [countPage, setCountPage] = useState(0);
-
   const [isShowQuestions, setIsShowQuestions] = useState(true);
 
   const handlePage = (value) => {
     setCountPage(value);
   };
 
-  const sliceQuestions = () => {
-    const slice = 1;
-
-    const copyQuestions = [...questions];
-    const result = [];
-
-    for (let s = 0, e = slice; s < copyQuestions.length; s += slice, e += slice)
-      result.push(copyQuestions.slice(s, e));
-
-    return result[countPage];
-  };
-
-  const handleChangeAnswer = (answerId, event, answerIndex) => {
+  const handleChangeAnswer = (answerId, event) => {
     const copyQuestions = [...questions];
 
     if (event.target.checked) {
       copyQuestions[countPage].answer.push(answerId);
     }
     else {
-      copyQuestions[countPage].answer.splice(answerIndex, 1);
+      copyQuestions[countPage].answer.splice(copyQuestions[countPage].answer.indexOf(answerId), 1);
     }
     setQuestions(copyQuestions);
   };
 
+  const getcolorText = (indexQuestion, item) => (
+    questions[indexQuestion].right.includes(item)
+  );
 
-  const getcolorText = (indexQuestion, item) => {
-    const copyQuestions = [...questions];
-
-    const result = copyQuestions[indexQuestion].right.includes(item);
-
-    return result;
-  };
-
-  const disableButton = () => {
-    return questions.find(item => item.answer.length === 0);
-  };
+  const disableButton = () => (
+    questions.find(item => item.answer.length === 0)
+  );
 
   const showResults = () => {
     const copyQuestions = [...questions];
@@ -97,6 +80,8 @@ const Lesson = () => {
         item.answer = [];
       })
     }
+    setQuestions(copyQuestions);
+    setCountPage(0);
     setIsShowQuestions(!isShowQuestions);
   };
 
@@ -104,16 +89,11 @@ const Lesson = () => {
     <div className={classes.root}>
       {isShowQuestions ?
         (
-          <div> {
-            sliceQuestions().map((item, index) => (
-              <div key={index}>
-                <Answers
-                  handleChangeAnswer={handleChangeAnswer}
-                  questions={item}
-                />
-              </div>
-            ))
-          }
+          <div >
+            <Answers
+              handleChangeAnswer={handleChangeAnswer}
+              questions={questions[countPage]}
+            />
             <ArrowButtons
               handlePage={handlePage}
               countPage={countPage}
@@ -128,7 +108,7 @@ const Lesson = () => {
                   {item.answer.map((item, indexAnswer) => (
                     <div key={indexAnswer} >
                       <p
-                        className={getcolorText(indexQuestion, item) ? 'right' : 'noRight'}
+                        className={getcolorText(indexQuestion, item) ? 'correct' : 'incorrect'}
                       >
                         {item}
                       </p>
@@ -153,9 +133,14 @@ const Lesson = () => {
           </div>
         )
       }
-      <Button disabled={disableButton()} onClick={showResults}>
-        {isShowQuestions ? 'Check Answers' : ' Try again'}
-      </Button>
+      {isShowQuestions ?
+        <Button disabled={disableButton()} onClick={showResults}>
+          Check Answers
+        </Button> :
+        <Button onClick={showResults}>
+          Try again
+        </Button>
+      }
     </div >
   );
 };

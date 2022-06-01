@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { LeftCircleTwoTone, RightCircleTwoTone } from '@ant-design/icons';
 import { Button } from 'antd';
 

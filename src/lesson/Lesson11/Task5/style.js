@@ -10,11 +10,11 @@ const useStyles = createUseStyles({
     height: '100%',
     fontSize: '24px',
 
-    "& .noRight ": {
+    "& .incorrect ": {
       color: 'red',
     },
 
-    "& .right": {
+    "& .correct": {
       color: 'green',
     },
   },

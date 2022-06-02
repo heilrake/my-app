@@ -12,10 +12,14 @@ const Task = ({
   deleteTask,
   handleChangeCheckBox,
   handleChangeField,
+  editInputValue,
   editTask,
   inputValue,
+  isDisabledEditButton,
   onBlur }) => {
   const classes = useStyle();
+
+  console.log(editInputValue);
 
   return (
     <Box className={classes.root}>
@@ -30,38 +34,38 @@ const Task = ({
               />
               <Box className={classes.editField}>
                 {!item.name.isAdditable ? (
-                  <p>{item.name.name}</p>
+                  <p>{item.name.lable}</p>
                 ) : (
                   <TextField
-                    label='edit name'
+                    label='Edit name'
                     name='name'
-                    value={inputValue.name}
+                    value={inputValue.lable}
                     onChange={handleChangeField}
                     onBlur={() => onBlur(item.id, 'name')}
                   />
                 )
                 }
                 {!item.isChecked &&
-                  <Button sx={{ color: 'black' }} onClick={() => editTask(item.id, 'name')}>
+                  <Button disabled={isDisabledEditButton(item)} sx={{ color: 'black' }} onClick={() => editTask(item.id, 'name')}>
                     <EditIcon />
                   </Button>
                 }
               </Box>
               <Box className={classes.editField}>
                 {!item.description.isAdditable ? (
-                  <p>{item.description.name}</p>
+                  <p>{item.description.lable}</p>
                 ) : (
                   <TextField
-                    label='edit description '
+                    label='Edit description '
                     name='description'
-                    value={inputValue.description}
+                    value={editInputValue.description}
                     onChange={handleChangeField}
                     onBlur={() => onBlur(item.id, 'description')}
                   />
                 )
                 }
                 {!item.isChecked &&
-                  <Button sx={{ color: 'black' }} onClick={() => editTask(item.id, 'description')}>
+                  <Button disabled={isDisabledEditButton(item)} sx={{ color: 'black' }} onClick={() => editTask(item.id, 'description')}>
                     <EditIcon />
                   </Button>
                 }

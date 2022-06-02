@@ -8,19 +8,34 @@ const Lesson = () => {
   const classes = useStyles();
 
   const [todoList, setTodoList] = useState([]);
-  const [inputValue, setInputValue] = useState({ name: '', description: '' });
+  const [inputValue, setInputValue] = useState({ lable: '', description: '' });
+  const [editInputValue, setEditInputValue] = useState({ name: '', description: '' });
 
   const handleChangeField = ({ target: { name, value } }) => {
-    setInputValue((prevState) => ({ ...prevState, [name]: value }))
+    setInputValue((prevState) => ({ ...prevState, [name]: value }));
+    setEditInputValue((prevState) => ({ ...prevState, [name]: value }))
   };
 
+  console.log(editInputValue);
+  console.log(inputValue);
   const editTask = (id, field) => {
     const copyTodoList = [...todoList];
 
     const result = copyTodoList.find((item) => item.id === id);
     result[field].isAdditable = !result[field].isAdditable;
 
-    setTodoList(copyTodoList)
+    setTodoList(copyTodoList);
+  };
+
+  const isDisabledEditButton = ({ id, name, description }) => {
+    const copyTodoList = [...todoList];
+
+    const result = copyTodoList.find((item) => item.name.isAdditable || item.description.isAdditable);
+
+    if (result && !(name.isAdditable || description.isAdditable) && !(result.id === id)) {
+      return true
+    }
+    return false
   };
 
   const onBlur = (id, field) => {
@@ -30,11 +45,10 @@ const Lesson = () => {
 
     if (inputValue[field] !== '' || !result[field].isAdditable) {
 
-      result[field].name = inputValue[field];
-      result[field].isAdditable = !result[field].isAdditable
+      result[field].lable = inputValue[field];
+      result[field].isAdditable = !result[field].isAdditable;
 
       setTodoList(copyTodoList);
-      setInputValue({ name: '', description: '' });
     }
   };
 
@@ -50,8 +64,8 @@ const Lesson = () => {
     const copyTodoList = [...todoList];
 
     copyTodoList.unshift({
-      name: { name: data.name, isAdditable: false }, description: {
-        name: data.description, isAdditable: false
+      name: { lable: data.name, isAdditable: false }, description: {
+        lable: data.description, isAdditable: false
       }, id: todoList.length, isChecked: false,
     });
     setTodoList(copyTodoList);
@@ -76,8 +90,10 @@ const Lesson = () => {
       />
       {todoList.length !== 0 &&
         <Task
+          isDisabledEditButton={isDisabledEditButton}
           onBlur={onBlur}
           inputValue={inputValue}
+          editInputValue={editInputValue}
           editTask={editTask}
           todoList={todoList}
           deleteTask={deleteTask}

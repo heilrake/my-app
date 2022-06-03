@@ -47,34 +47,41 @@ const Lesson = () => {
   const [tasks, setTasks] = useState([...TASKS]);
   const [value, onChange] = useState(new Date());
   const [selectDate, setSelectDate] = useState();
-  const [inShowTask, setInShowTask] = useState(false);
+  const [inShowTask, setInShowTask] = useState(true);
 
   const showTasks = () => {
     const month = value.getMonth();
     const day = value.getDate();
     const years = value.getFullYear();
 
-    const result = tasks.find((item) => item.day === day && item.month === month + 1 && item.year === years)
-    if (result)
-      setSelectDate(result.task);
+    const result = tasks.find((item) => item.day === day && item.month === month + 1 && item.year === years);
+
+    setSelectDate(result);
 
     setInShowTask(!inShowTask);
   };
 
   const addTask = () => {
-
-
+    const copyTasks = [...tasks];
+    console.log(value);
+    //copyTasks.unshift(task: )
   };
 
+  const onChangeCalendar = (data) => {
+    showTasks()
+    onChange(data)
+  };
+
+  console.log(selectDate);
   return (
     <div>
-      <Calendar onChange={onChange} value={value} />
-      <Button variant="contained" onClick={showTasks}>Show task</Button>
+      <Calendar onChange={onChangeCalendar} value={value} />
+
       {
         inShowTask ?
           selectDate ? (
             <div > {
-              selectDate.map((item, index) => (
+              selectDate.task.map((item, index) => (
                 <p key={index}> {item}</p>
               ))
             }</div>
@@ -82,8 +89,8 @@ const Lesson = () => {
             <div>
               <form onSubmit={addTask}>
                 <p>На сьогоднішню дату завдань немає </p>
-                <TextField />
-                <Button type='submit' variant="contained">Створити</Button>
+                <TextField size="small" label='Create task' />
+                <Button type='submit' variant="contained">Create</Button>
               </form>
             </div>
           )

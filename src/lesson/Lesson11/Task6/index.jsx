@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import AddTask from './AddTask';
 import Task from './Task';
 
@@ -8,19 +9,15 @@ const Lesson = () => {
   const classes = useStyles();
 
   const [todoList, setTodoList] = useState([]);
-  const [inputValue, setInputValue] = useState({ lable: '', description: '' });
+  const [inputValue, setInputValue] = useState({ name: '', description: '' });
   const [editInputValue, setEditInputValue] = useState({ name: '', description: '' });
 
   const handleChangeField = ({ target: { name, value } }) => {
     setInputValue((prevState) => ({ ...prevState, [name]: value }));
-    setEditInputValue((prevState) => ({ ...prevState, [name]: value }))
   };
 
-  console.log(editInputValue);
-  console.log(inputValue);
   const editTask = (id, field) => {
     const copyTodoList = [...todoList];
-
     const result = copyTodoList.find((item) => item.id === id);
     result[field].isAdditable = !result[field].isAdditable;
 
@@ -29,26 +26,26 @@ const Lesson = () => {
 
   const isDisabledEditButton = ({ id, name, description }) => {
     const copyTodoList = [...todoList];
-
     const result = copyTodoList.find((item) => item.name.isAdditable || item.description.isAdditable);
 
     if (result && !(name.isAdditable || description.isAdditable) && !(result.id === id)) {
       return true
     }
+
     return false
   };
 
   const onBlur = (id, field) => {
     const copyTodoList = [...todoList];
-
     const result = copyTodoList.find((item) => item.id === id);
 
     if (inputValue[field] !== '' || !result[field].isAdditable) {
 
-      result[field].lable = inputValue[field];
+      result[field].name = inputValue[field];
       result[field].isAdditable = !result[field].isAdditable;
 
       setTodoList(copyTodoList);
+      setInputValue({ lable: '', description: '' });
     }
   };
 
@@ -68,12 +65,12 @@ const Lesson = () => {
         lable: data.description, isAdditable: false
       }, id: todoList.length, isChecked: false,
     });
+
     setTodoList(copyTodoList);
   };
 
   const handleChangeCheckBox = (id) => {
     const copyTodoList = [...todoList];
-
     const result = copyTodoList.find((task) => task.id === id);
 
     if (!result.name.isAdditable && !result.description.isAdditable) {

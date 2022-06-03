@@ -18,9 +18,7 @@ const Task = ({
   isDisabledEditButton,
   onBlur }) => {
   const classes = useStyle();
-
-  console.log(editInputValue);
-
+  console.log(inputValue);
   return (
     <Box className={classes.root}>
       <p className={classes.title}>Tasks</p>
@@ -39,7 +37,7 @@ const Task = ({
                   <TextField
                     label='Edit name'
                     name='name'
-                    value={inputValue.lable}
+                    value={inputValue.name}
                     onChange={handleChangeField}
                     onBlur={() => onBlur(item.id, 'name')}
                   />
@@ -58,7 +56,7 @@ const Task = ({
                   <TextField
                     label='Edit description '
                     name='description'
-                    value={editInputValue.description}
+                    value={inputValue.description}
                     onChange={handleChangeField}
                     onBlur={() => onBlur(item.id, 'description')}
                   />

@@ -9,29 +9,35 @@ const Lesson = () => {
   const classes = useStyles();
 
   const [todoList, setTodoList] = useState([]);
-  const [inputValue, setInputValue] = useState({ name: '', description: '' });
-  const [editInputValue, setEditInputValue] = useState({ name: '', description: '' });
+  const [inputValue, setInputValue] = useState({ nameOfTask: '', description: '' });
+  const [editInputValue, setEditInputValue] = useState({ nameOfTask: '', description: '' });
 
   const handleChangeField = ({ target: { name, value } }) => {
     setInputValue((prevState) => ({ ...prevState, [name]: value }));
+    setEditInputValue((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const editTask = (id, field) => {
+  const editTask = (id, field, event) => {
+    console.log(field);
     const copyTodoList = [...todoList];
-    const result = copyTodoList.find((item) => item.id === id);
-    result[field].isAdditable = !result[field].isAdditable;
+    const itemIndex = copyTodoList.findIndex((item) => item.id === id);
 
+    copyTodoList[itemIndex][field].isAdditable = !copyTodoList[itemIndex][field].isAdditable;
+
+    setInputValue((prevState) => ({
+      ...prevState,
+      [field]: copyTodoList[itemIndex][field].value
+    }));
     setTodoList(copyTodoList);
   };
 
-  const isDisabledEditButton = ({ id, name, description }) => {
+  const isDisabledEditButton = ({ id, nameOfTask, description }) => {
     const copyTodoList = [...todoList];
-    const result = copyTodoList.find((item) => item.name.isAdditable || item.description.isAdditable);
+    const result = copyTodoList.find((item) => item.nameOfTask.isAdditable || item.description.isAdditable);
 
-    if (result && !(name.isAdditable || description.isAdditable) && !(result.id === id)) {
+    if (result && !(nameOfTask.isAdditable || description.isAdditable) && !(result.id === id)) {
       return true
     }
-
     return false
   };
 
@@ -41,11 +47,13 @@ const Lesson = () => {
 
     if (inputValue[field] !== '' || !result[field].isAdditable) {
 
-      result[field].name = inputValue[field];
+      result[field].value = inputValue[field];
       result[field].isAdditable = !result[field].isAdditable;
 
       setTodoList(copyTodoList);
-      setInputValue({ lable: '', description: '' });
+      setInputValue({
+        nameOfTask: '', description: ''
+      });
     }
   };
 
@@ -61,8 +69,8 @@ const Lesson = () => {
     const copyTodoList = [...todoList];
 
     copyTodoList.unshift({
-      name: { lable: data.name, isAdditable: false }, description: {
-        lable: data.description, isAdditable: false
+      nameOfTask: { value: data.name, isAdditable: false }, description: {
+        value: data.description, isAdditable: false
       }, id: todoList.length, isChecked: false,
     });
 
@@ -73,7 +81,7 @@ const Lesson = () => {
     const copyTodoList = [...todoList];
     const result = copyTodoList.find((task) => task.id === id);
 
-    if (!result.name.isAdditable && !result.description.isAdditable) {
+    if (!result.nameOfTask.isAdditable && !result.description.isAdditable) {
       result.isChecked = !result.isChecked;
       setTodoList(copyTodoList);
     }

@@ -12,13 +12,12 @@ const Task = ({
   deleteTask,
   handleChangeCheckBox,
   handleChangeField,
-  editInputValue,
   editTask,
   inputValue,
   isDisabledEditButton,
   onBlur }) => {
   const classes = useStyle();
-  console.log(inputValue);
+
   return (
     <Box className={classes.root}>
       <p className={classes.title}>Tasks</p>
@@ -31,41 +30,52 @@ const Task = ({
                 checked={item.isChecked}
               />
               <Box className={classes.editField}>
-                {!item.name.isAdditable ? (
-                  <p>{item.name.lable}</p>
-                ) : (
+                {item.nameOfTask.isAdditable ? (
                   <TextField
                     label='Edit name'
-                    name='name'
-                    value={inputValue.name}
+                    name='nameOfTask'
+                    autoFocus
+                    value={inputValue.nameOfTask}
                     onChange={handleChangeField}
-                    onBlur={() => onBlur(item.id, 'name')}
+                    onBlur={() => onBlur(item.id, 'nameOfTask')}
                   />
-                )
-                }
-                {!item.isChecked &&
-                  <Button disabled={isDisabledEditButton(item)} sx={{ color: 'black' }} onClick={() => editTask(item.id, 'name')}>
+                ) : (
+                  <p>{item.nameOfTask.value}</p>
+                )}
+                {!item.isChecked && !item.nameOfTask.isAdditable ? (
+                  <Button disabled={isDisabledEditButton(item)}
+                    sx={{ color: 'black' }}
+                    onClick={() => editTask(item.id, 'nameOfTask')}
+                  >
                     <EditIcon />
                   </Button>
-                }
+                ) : (
+                  ''
+                )}
               </Box>
               <Box className={classes.editField}>
-                {!item.description.isAdditable ? (
-                  <p>{item.description.lable}</p>
-                ) : (
+                {item.description.isAdditable ? (
                   <TextField
                     label='Edit description '
                     name='description'
+                    autoFocus
                     value={inputValue.description}
                     onChange={handleChangeField}
                     onBlur={() => onBlur(item.id, 'description')}
                   />
-                )
-                }
-                {!item.isChecked &&
-                  <Button disabled={isDisabledEditButton(item)} sx={{ color: 'black' }} onClick={() => editTask(item.id, 'description')}>
+                ) : (
+                  <p>{item.description.value}</p>
+                )}
+                {!item.isChecked && !item.description.isAdditable ? (
+                  < Button disabled={isDisabledEditButton(item)}
+                    sx={{ color: 'black' }}
+                    onClick={() => editTask(item.id, 'description')}
+                  >
                     <EditIcon />
                   </Button>
+                ) : (
+                  ''
+                )
                 }
               </Box>
               {!item.isChecked &&
@@ -80,7 +90,7 @@ const Task = ({
         ))
         }
       </Box >
-    </Box>
+    </Box >
   );
 };
 

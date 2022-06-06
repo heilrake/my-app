@@ -9,7 +9,7 @@ const TASKS = [
   {
     id: 1,
     day: 3,
-    month: 11,
+    month: 6,
     year: 2022,
     task: [' Crate Box machine 1']
   },
@@ -47,18 +47,12 @@ const Lesson = () => {
   const [tasks, setTasks] = useState([...TASKS]);
   const [value, onChange] = useState(new Date());
   const [selectDate, setSelectDate] = useState();
-  const [inShowTask, setInShowTask] = useState(true);
+  //const [inShowTask, setInShowTask] = useState(false);
 
   const showTasks = () => {
-    const month = value.getMonth();
-    const day = value.getDate();
-    const years = value.getFullYear();
 
-    const result = tasks.find((item) => item.day === day && item.month === month + 1 && item.year === years);
 
-    setSelectDate(result);
-
-    setInShowTask(!inShowTask);
+    // setInShowTask(!inShowTask);
   };
 
   const addTask = () => {
@@ -68,7 +62,13 @@ const Lesson = () => {
   };
 
   const onChangeCalendar = (data) => {
-    showTasks()
+    const month = value.getMonth();
+    const day = value.getDate();
+    const years = value.getFullYear();
+
+    const result = tasks.find((item) => item.day === day && item.month === month + 1 && item.year === years);
+
+    setSelectDate(result);
     onChange(data)
   };
 
@@ -76,27 +76,23 @@ const Lesson = () => {
   return (
     <div>
       <Calendar onChange={onChangeCalendar} value={value} />
-
       {
-        inShowTask ?
-          selectDate ? (
-            <div > {
-              selectDate.task.map((item, index) => (
-                <p key={index}> {item}</p>
-              ))
-            }</div>
-          ) : (
-            <div>
-              <form onSubmit={addTask}>
-                <p>На сьогоднішню дату завдань немає </p>
-                <TextField size="small" label='Create task' />
-                <Button type='submit' variant="contained">Create</Button>
-              </form>
-            </div>
-          )
-          : ''
+        selectDate ? (
+          <div > {
+            selectDate.task.map((item, index) => (
+              <p key={index}> {item}</p>
+            ))
+          }</div>
+        ) : (
+          <div>
+            <form onSubmit={addTask}>
+              <p>На сьогоднішню дату завдань немає </p>
+              <TextField size="small" label='Create task' />
+              <Button type='submit' variant="contained">Create</Button>
+            </form>
+          </div>
+        )
       }
-
     </div >
   );
 };

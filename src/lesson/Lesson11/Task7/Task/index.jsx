@@ -44,22 +44,33 @@ const Task = ({
               )}
             </Box>
             <Box className={classes.buttonGroup}>
-              {(item.isChecked || !item.isAdditable) ? (
-                <Button
-                  onClick={() => editTask(selectTask.id, index)}
-                  disabled={isDisabledEditButton(selectTask.task)}
-                  variant="contained"
-                >
-                  Edit
-                </Button>
+              {(!item.isChecked && !item.isAdditable) ? (
+                <Box sx={{ display: 'flex', gap: '10px' }}>
+                  <Button
+                    onClick={() => editTask(selectTask.id, index)}
+                    disabled={isDisabledEditButton(selectTask.task)}
+                    variant="contained"
+                  >
+                    Edit
+                  </Button>
+                  <Box className={classes.deleteButton}>
+                    <Button
+                      onClick={() => deleteTask(selectTask.id, index)}
+                      variant="contained"
+                    >
+                      Delete
+                    </Button>
+                  </Box>
+                </Box>
               ) : (
                 <Box className={classes.buttonGroup}>
-                  <Button
-                    variant="contained"
-                    onClick={() => saveTask(selectTask.id, index)}
-                  >
-                    Save
-                  </Button>
+                  {!item.isChecked &&
+                    <Button
+                      variant="contained"
+                      onClick={() => saveTask(selectTask.id, index)}
+                    >
+                      Save
+                    </Button>}
                   <Box className={classes.deleteButton}>
                     <Button
                       onClick={() => deleteTask(selectTask.id, index)}
